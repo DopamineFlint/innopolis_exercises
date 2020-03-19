@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-
 public class Gasoline {
     public static void main(String[] args) {
         double litre = 50;
