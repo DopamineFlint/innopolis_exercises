@@ -1,3 +1,5 @@
+package ru.baryshnikov.task1;
+
 import java.util.Scanner;
 
 public class SecConverter {
