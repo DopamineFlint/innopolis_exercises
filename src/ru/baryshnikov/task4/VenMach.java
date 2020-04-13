@@ -22,7 +22,7 @@ public class VenMach {
     private int totalMoney = 0;
     private int i = 1;
     private String choose;
-    private int counter = 0;
+    private int counter = 1;
     private int chooseDrink;
 
     VenMach() {
@@ -32,43 +32,46 @@ public class VenMach {
     }
 
     public void use() {
-        if (counter == 0) {
-            System.out.println("Hello! You have few options:");
-            counter++;
-        }
-        System.out.println("");
-        System.out.println("1. Show list of all drinks");
-        System.out.println("2. Money deposit");
-        System.out.println("3. Choose and Buy a drink");
-        System.out.println("4. Exit");
-        Scanner scan = new Scanner(System.in);
-        choose = scan.next();
-        switch (choose) {
-            case "1":
-                System.out.println("Here is a list of all drinks we have: ");
-                showAllDrinks();
-                use();
-            case "2":
-                System.out.println("How much amount of money you want to deposit?");
-                addMoney(money = scan.nextInt());
-                use();
-            case "3":
-                System.out.println("Choose a drink: ");
-                if (totalMoney < 15) {
-                    System.out.println("Warning! You have " + totalMoney + "₽ in your wallet, you should at least have 15 roubles total.");
-                    use();
-                }
-                showAllDrinks();
-                chooseDrink = scan.nextInt();
-                buyDrink(chooseDrink);
-            case "4":
-                System.out.println("Thank you for using our vending machine!");
-                counter = 0;
-                break;
-            default:
-                System.out.println("Error! You've chosen wrong number or pressed wrong button. Please, press right button: ");
-                use();
-        }
+        do {
+            System.out.println("");
+            System.out.println("1. Show the list of all drinks");
+            System.out.println("2. Money deposit");
+            System.out.println("3. Choose and Buy a drink");
+            System.out.println("4. Exit");
+            Scanner scan = new Scanner(System.in);
+            choose = scan.next();
+            switch (choose) {
+                case "1":
+                    System.out.println("Here is a list of all drinks we have: ");
+                    showAllDrinks();
+                    //use();
+                    break;
+                case "2":
+                    System.out.println("How much amount of money you want to deposit?");
+                    addMoney(money = scan.nextInt());
+                    //use();
+                    break;
+                case "3":
+                    System.out.println("Choose a drink: ");
+                    if (totalMoney < 15) {
+                        System.out.println("Warning! You have " + totalMoney + "₽ in your wallet, you should at least have 15 roubles total.");
+                        //use();
+                        break;
+                    }
+                    showAllDrinks();
+                    chooseDrink = scan.nextInt();
+                    buyDrink(chooseDrink);
+                    break;
+                case "4":
+                    System.out.println("Thank you for using our vending machine!");
+                    counter = 0;
+                    break;
+                default:
+                    System.out.println("Error! You've chosen wrong number or pressed wrong button. Please, press right button: ");
+                    //use();
+                    break;
+            }
+        } while (counter != 0);
     }
 
     public void buyDrink(int ch) {
@@ -83,11 +86,11 @@ public class VenMach {
             totalMoney -= drinks.get(ch).getPrice();
             System.out.println("You've bought " + drinks.get(ch).getName());
             System.out.println("Your amount of money is: " + totalMoney + "₽");
-            use();
+            //use();
         } else {
             System.out.println("You don't have enough money to get this drink");
             System.out.println("This drink costs " + drinks.get(ch).getPrice() + "₽. You have: " + totalMoney + "₽");
-            use();
+            //use();
         }
     }
 
