@@ -4,20 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VenMach {
-    private ArrayList<Drinks> drinks = new ArrayList<>() {{
-        Drinks coke;
-        Drinks pepsi;
-        Drinks sevenUp;
-        Drinks mntnDew;
-        Drinks rootBeer;
-        Drinks ion;
-        add(coke = new Drinks("Coke", 20));
-        add(pepsi = new Drinks("Pepsi", 15));
-        add(sevenUp = new Drinks("7 UP", 30));
-        add(mntnDew = new Drinks("Mntn Dew", 50));
-        add(rootBeer = new Drinks("Root Beer", 33));
-        add(ion = new Drinks("ION Energy Drink", 77));
-    }};
+    private ArrayList<Drinks> drinks = new ArrayList<>();
+
     private int money = 0;
     private int totalMoney = 0;
     private int i = 1;
@@ -26,6 +14,13 @@ public class VenMach {
     private int chooseDrink;
 
     VenMach() {
+        drinks.add(new Drinks("Coke", 20));
+        drinks.add(new Drinks("Pepsi", 15));
+        drinks.add(new Drinks("7 UP", 30));
+        drinks.add(new Drinks("Mntn Dew", 50));
+        drinks.add(new Drinks("Root Beer", 33));
+        drinks.add(new Drinks("ION Energy Drink", 77));
+
         System.out.println("");
         System.out.println("Vending Machine have been launched");
         System.out.println("");
@@ -44,7 +39,6 @@ public class VenMach {
                 case "1":
                     System.out.println("Here is a list of all drinks we have: ");
                     showAllDrinks();
-                    //use();
                     break;
                 case "2":
                     System.out.println("How much amount of money you want to deposit?");
@@ -55,7 +49,6 @@ public class VenMach {
                     System.out.println("Choose a drink: ");
                     if (totalMoney < 15) {
                         System.out.println("Warning! You have " + totalMoney + "₽ in your wallet, you should at least have 15 roubles total.");
-                        //use();
                         break;
                     }
                     showAllDrinks();
@@ -68,7 +61,6 @@ public class VenMach {
                     break;
                 default:
                     System.out.println("Error! You've chosen wrong number or pressed wrong button. Please, press right button: ");
-                    //use();
                     break;
             }
         } while (counter != 0);
@@ -86,11 +78,9 @@ public class VenMach {
             totalMoney -= drinks.get(ch).getPrice();
             System.out.println("You've bought " + drinks.get(ch).getName());
             System.out.println("Your amount of money is: " + totalMoney + "₽");
-            //use();
         } else {
             System.out.println("You don't have enough money to get this drink");
             System.out.println("This drink costs " + drinks.get(ch).getPrice() + "₽. You have: " + totalMoney + "₽");
-            //use();
         }
     }
 
