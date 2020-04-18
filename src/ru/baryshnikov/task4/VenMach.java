@@ -1,6 +1,7 @@
 package ru.baryshnikov.task4;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class VenMach {
@@ -8,10 +9,12 @@ public class VenMach {
 
     private int money = 0;
     private int totalMoney = 0;
-    private int i = 1;
+    private int i = 0;
     private String choose;
     private int counter = 1;
     private int chooseDrink;
+    private boolean exc = true;
+    private int ch;
 
     VenMach() {
         drinks.add(new Drinks("Coke", 20));
@@ -43,7 +46,6 @@ public class VenMach {
                 case "2":
                     System.out.println("How much amount of money you want to deposit?");
                     addMoney(money = scan.nextInt());
-                    //use();
                     break;
                 case "3":
                     System.out.println("Choose a drink: ");
@@ -52,8 +54,8 @@ public class VenMach {
                         break;
                     }
                     showAllDrinks();
-                    chooseDrink = scan.nextInt();
-                    buyDrink(chooseDrink);
+                    //chooseDrink = scan.nextInt();
+                    buyDrink(); //chooseDrink
                     break;
                 case "4":
                     System.out.println("Thank you for using our vending machine!");
@@ -66,14 +68,32 @@ public class VenMach {
         } while (counter != 0);
     }
 
-    public void buyDrink(int ch) {
-        ch -= 1;
+    public void buyDrink() { //int ch
+        int indexNum = drinks.size();
+        System.out.println(indexNum -= 1);
         Scanner scan = new Scanner(System.in);
-        if ((ch < 0) || (ch > drinks.size())) {
-            System.out.println("You've entered wrong number or symbol. Please re-enter: ");
-            chooseDrink = scan.nextInt();
-            buyDrink(chooseDrink);
-        }
+        do {
+            try {
+                ch = scan.nextInt();
+                if ((ch < 0) || (ch > indexNum)) throw new ArrayIndexOutOfBoundsException();
+                exc = false;
+            } catch (InputMismatchException ime) {
+                System.out.println("You've entered wrong symbol");
+                break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Out of bounds");
+                showAllDrinks();
+            }
+        } while (exc);
+
+        /*if ((ch < 0) || (ch > indexNum)) {
+            do {
+                System.out.println("You've entered wrong number or symbol. Please re-enter: ");
+                System.out.println(drinks.size());
+                ch = scan.nextInt();
+            } while ((ch < 0) || (ch > indexNum));
+        }*/
+
         if (totalMoney >= drinks.get(ch).getPrice()) {
             totalMoney -= drinks.get(ch).getPrice();
             System.out.println("You've bought " + drinks.get(ch).getName());
@@ -95,6 +115,6 @@ public class VenMach {
             System.out.println(i + ". " + f.getName() + ": " + f.getPrice() + "₽");
             i++;
         }
-        i = 1;
+        i = 0;
     }
 }
