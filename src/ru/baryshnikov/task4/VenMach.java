@@ -54,8 +54,7 @@ public class VenMach {
                         break;
                     }
                     showAllDrinks();
-                    //chooseDrink = scan.nextInt();
-                    buyDrink(); //chooseDrink
+                    buyDrink();
                     break;
                 case "4":
                     System.out.println("Thank you for using our vending machine!");
@@ -68,10 +67,11 @@ public class VenMach {
         } while (counter != 0);
     }
 
-    public void buyDrink() { //int ch
+    public void buyDrink() {
         int indexNum = drinks.size();
         System.out.println(indexNum -= 1);
         Scanner scan = new Scanner(System.in);
+        exc = true;
         do {
             try {
                 ch = scan.nextInt();
@@ -79,20 +79,13 @@ public class VenMach {
                 exc = false;
             } catch (InputMismatchException ime) {
                 System.out.println("You've entered wrong symbol");
-                break;
+                showAllDrinks();
+                scan.next();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Out of bounds");
                 showAllDrinks();
             }
         } while (exc);
-
-        /*if ((ch < 0) || (ch > indexNum)) {
-            do {
-                System.out.println("You've entered wrong number or symbol. Please re-enter: ");
-                System.out.println(drinks.size());
-                ch = scan.nextInt();
-            } while ((ch < 0) || (ch > indexNum));
-        }*/
 
         if (totalMoney >= drinks.get(ch).getPrice()) {
             totalMoney -= drinks.get(ch).getPrice();
