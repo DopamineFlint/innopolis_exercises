@@ -11,6 +11,7 @@ public class Library {
     private ArrayList<String> arr = new ArrayList<>();
     private int choose;
     private String yn;
+    private final String PATH = "C:\\library\\";
 
     public Library() {
         if (bookDir.isDirectory()) {
@@ -26,7 +27,7 @@ public class Library {
         String author = scan.nextLine();
         int year = scan.nextInt();
         String text = scan.nextLine();
-        File f = new File("C:\\library\\" + name + ".dat");
+        File f = new File(PATH + name + ".dat");
         int ch = 1;
 
         if (f.exists()) {
@@ -35,7 +36,7 @@ public class Library {
                 yn = scan.nextLine();
                 switch (yn) {
                     case ("y"):
-                        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\library\\"
+                        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH
                                 + name + ".dat"))) {
                             Book b = new Book(name, author, year, text);
                             oos.writeObject(b);
@@ -54,7 +55,7 @@ public class Library {
                 }
             } while (ch == 1);
         } else {
-            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\library\\" + name +
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH + name +
                     ".dat"))) {
                 Book b = new Book(name, author, year, text);
                 oos.writeObject(b);
@@ -90,7 +91,7 @@ public class Library {
                     if ((choose < 0) || (choose > indexNum)) {
                         System.out.println("Out of bounds");
                     } else {
-                        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\library\\" +
+                        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH +
                                 arr.get(choose)))) {
                             Book b = (Book) ois.readObject();
                             System.out.printf("Name: %s \t Author: %s \t Year: %d \n", b.getName(), b.getAuthor(),
@@ -134,7 +135,7 @@ public class Library {
                         System.out.println("Out of bounds");
                         //choose = scan.nextInt();
                     } else {
-                        File f = new File("C:\\library\\" + arr.get(choose));
+                        File f = new File(PATH + arr.get(choose));
                         f.delete();
                         exc = true;
                     }

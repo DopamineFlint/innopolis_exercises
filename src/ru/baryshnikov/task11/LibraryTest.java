@@ -8,6 +8,10 @@ public class LibraryTest {
         Scanner scan = new Scanner(System.in);
         Library lib = new Library();
         do {
+            System.out.println("1. Add Book");
+            System.out.println("2. Read Book");
+            System.out.println("3. Delete File");
+            System.out.println("4. Exit");
             String s = scan.nextLine();
             switch (s) {
                 case("1"):
