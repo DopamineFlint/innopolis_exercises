@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Main {
-    private double temp_min;
-    private double temp_max;
+    double temp_min;
+    double temp_max;
 
     public double getTemp_min() {
         return this.temp_min;

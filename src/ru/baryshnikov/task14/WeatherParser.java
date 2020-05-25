@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class WeatherParser {
-    private static String link = "http://api.openweathermap.org/data/2.5/weather?q=Kazan&appid=7d172c3813ebdc93470b4d86c62575b3";
+    private static String link = "post your link here";
 
     public static void main(String[] args) throws MalformedURLException {
         URL url = new URL(link);
@@ -18,8 +18,8 @@ public class WeatherParser {
 
             System.out.println(weather.getName());
             System.out.println(weather.getTimezone());
-            System.out.println(weather.getMin());
-            System.out.println(weather.getMax());
+            System.out.println(weather.getMain().getTemp_min());
+            System.out.println(weather.getMain().getTemp_max());
         } catch (IOException e) {
             e.printStackTrace();
         }
