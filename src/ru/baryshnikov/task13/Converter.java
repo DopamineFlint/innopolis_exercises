@@ -4,7 +4,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Formatter;
 import java.util.Scanner;
 
 public class Converter {
@@ -12,8 +11,10 @@ public class Converter {
         ArrayList<String> products = new ArrayList<>();
         ArrayList<Double> price = new ArrayList<>();
         ArrayList<Double> amount = new ArrayList<>();
-        Formatter form = new Formatter();
         String s;
+        String check;
+        double doubleOut;
+        int counter = 0;
 
         File f = new File("C:\\My Library\\products.txt");
         Scanner scan = new Scanner(f);
@@ -25,16 +26,28 @@ public class Converter {
         while (scan.hasNextLine()) {
             System.out.println("==" + i++);
 
-            if (scan.hasNextDouble()) {
-                price.add(scan.nextDouble());
-                amount.add(scan.nextDouble());
-            }
-
             if (scan.hasNextLine()) {
-                products.add(scan.nextLine());
+                check = scan.nextLine();
+
+                if (check.contains(".") || check.matches(".*\\d.*")) {
+                    doubleOut = Double.parseDouble(check);
+
+                    if (counter == 0) {
+                        price.add(doubleOut);
+                        counter++;
+                    } else {
+                        amount.add(doubleOut);
+                        counter = 0;
+                    }
+
+                } else {
+                    products.add(check);
+                }
             }
         }
-
+        System.out.println(products);
+        System.out.println(price);
+        System.out.println(amount);
         products.removeAll(Arrays.asList(""));
         System.out.println(products);
         System.out.println(price);
