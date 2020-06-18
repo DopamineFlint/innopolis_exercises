@@ -23,19 +23,20 @@ public class CustomMap {
     }
 
     public static void removeTheDuplicates(Map<String, Person> map) {
+        Map<String, Person> myMap = new HashMap<String, Person>(map);
         Person val;
-        for (Iterator<Person> it = map.values().iterator(); it.hasNext();) {
+        for (Iterator<Person> it = myMap.values().iterator(); it.hasNext();) {
+            int counter = 0;
             val = it.next();
-            //System.out.println(it.next());
-            for (Iterator itt = map.entrySet().iterator(); itt.hasNext();) {
+            for (Iterator<Person> itt = myMap.values().iterator(); itt.hasNext();) {
                 if (val.equals(itt.next())) {
-                    CustomMap.removeItemFromMapByValue(map, val);
+                    counter++;
                 }
             }
+            if (counter > 1) {
+                CustomMap.removeItemFromMapByValue(map, val);
+            }
         }
-
-
-        //CustomMap.removeItemFromMapByValue(map, map.get("Key1")); //TEST!!!!
     }
 
     public static void removeItemFromMapByValue(Map<String, Person> map, Person value)
@@ -46,6 +47,18 @@ public class CustomMap {
             if (pair.getValue().equals(value))
                 map.remove(pair.getKey());
         }
+    }
+
+    public static String getMapAsString(Map<String, Person> map) {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, Person> entry : map.entrySet()) {
+            sb
+                    .append(entry.getKey())
+                    .append(" - ")
+                    .append(entry.getValue().toString())
+                    .append("\n");
+        }
+        return sb.toString();
     }
 
 }

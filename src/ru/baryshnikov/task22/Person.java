@@ -36,7 +36,7 @@ public class Person {
     }
 
     public String toString() {
-        return getClass().getName() + "@" + Integer.toHexString(hashCode());
+        return " Age: " + getAge() + "; Last Name: " + getLastName() + "; Sex: " + getSex() + " |";
     }
 
     @Override
